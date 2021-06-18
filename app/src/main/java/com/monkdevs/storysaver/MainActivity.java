@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         File[] files = directory.listFiles();
 
+
         if (files != null)
         {
             Log.d("rsin","founded");

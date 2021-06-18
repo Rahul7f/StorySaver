@@ -49,17 +49,11 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
 
     @Override
     public void onBindViewHolder(@NonNull StatusViewHolder holder, int position) {
-        holder.title.setText(statusObj.get(position).status.getName());
-        if (statusObj.get(position).status.getName().endsWith(".mp4")) {
-            holder.videoView.setVideoPath(statusObj.get(position).status.getPath());
-            holder.videoView.seekTo(1);
-            holder.imageView.setVisibility(View.GONE);
-        }else if(statusObj.get(position).status.getName().endsWith(".jpg")){
-            Glide.with(context)
-                    .load(statusObj.get(position).status)
-                    .into(holder.imageView);
-            holder.videoView.setVisibility(View.GONE);
-        }
+
+        Glide.with(context)
+                .load(statusObj.get(position).status)
+                .into(holder.imageView);
+
         holder.download.setOnClickListener(view->{
             makeCopy(statusObj.get(position).status);
         });
@@ -72,14 +66,10 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     }
 
     public static class StatusViewHolder extends RecyclerView.ViewHolder{
-        public TextView title;
-        public VideoView videoView;
         public Button download;
         public ImageView imageView;
         public StatusViewHolder(@NonNull View itemView) {
             super(itemView);
-        title=itemView.findViewById(R.id.statusDate);
-        videoView=itemView.findViewById(R.id.statusPreview);
         download=itemView.findViewById(R.id.downloadButton);
         imageView=itemView.findViewById(R.id.statusImage);
         }
